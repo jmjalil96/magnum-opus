@@ -21,6 +21,8 @@ status: skeleton
 | Enrollment | Managing the roster: which Employees and Dependents are covered and their policy assignments, with effective dates. | registration, onboarding | _(TBD)_ |
 | Insurer | The insurance company that ultimately pays. A catalog entry in the app; insurer people never use it (D-011). | carrier, company | _(TBD)_ |
 | Policy | _(definition pending — how policies, plans, and coverage are modeled is not yet decided)_ | plan (until decided) | _(TBD)_ |
+| Service Date | The date the medical service behind a claim was provided; must fall within the linked enrollment's period (BR-001). | claim date, event date | _(TBD)_ |
+| Snapshot | The unverified insured/enrollment data a portal-submitted claim carries in `draft`, before the brokerage links the real enrollment (D-018). | — | _(TBD)_ |
 
 ## Open decisions
 - [ ] Spanish UI label for every term (single canonical label each; the UI is Spanish-only).

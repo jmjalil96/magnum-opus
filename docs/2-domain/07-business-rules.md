@@ -10,7 +10,13 @@ status: skeleton
 _(empty — formulas and derived values: inputs, formula, rounding, edge cases)_
 
 ## Validations
-_(empty — cross-field and cross-entity rules; single-field constraints live in 09-database-schema.md)_
+_(cross-field and cross-entity rules; single-field constraints live in 09-database-schema.md)_
+
+### BR-001 — Service date within enrollment period
+The claim's service date must fall within the period of the enrollment linked to the claim. Enforced at T-001 (`draft` → `review`) — a claim cannot enter `review` without passing it. Source: D-018.
+
+### BR-002 — Enrollment belongs to the insured
+The enrollment linked to a claim must belong to the claim's insured (the Employee or Dependent the claim is for), and therefore to the correct Corporate Client. Without this, any enrollment with a matching period would satisfy BR-001. Enforced at T-001, together with BR-001. Source: D-024.
 
 ## Deadlines & time rules
 _(empty — anything driven by dates or elapsed time)_

@@ -42,7 +42,7 @@ Canonical status lives in each doc's YAML frontmatter (`status:`). The README in
 | Status | Gate to reach it |
 |--------|------------------|
 | `skeleton` | Structure exists; content empty. |
-| `drafted` | No placeholder sections remain. |
+| `drafted` | Every section has substantive content and no *same-doc* unknowns remain. Cells that reference another doc's IDs (`PERM-`, `N-`, …) may stay TBD while the owning doc hasn't minted them (D-027). |
 | `reviewed` | All cross-doc ID references checked and resolving. |
 | `final` | No unresolved blocking decisions; acceptance criteria linked where applicable. |
 
