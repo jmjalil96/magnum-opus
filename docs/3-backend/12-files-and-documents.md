@@ -19,7 +19,7 @@ _(empty — where files live, path/naming scheme, public vs signed access)_
 _(empty — who can view/download/delete which files; ties to 08-permissions-matrix.md)_
 
 ## Open decisions
-- [ ] Does the app handle file uploads at all? Attached to what?
+- [x] Does the app handle file uploads at all? Attached to what? → Yes: claims carry documents, attachable at submission and during processing (D-012)
 - [ ] Allowed file types and size limits?
 - [ ] Storage backend?
 - [ ] Can files be replaced/versioned, or only added and removed?

@@ -17,6 +17,7 @@ _(empty — for each entity: how it's created, changed, archived/deleted; entiti
 
 ## Open decisions
 - [ ] What are the top-level entities?
+- [ ] Is a corporate group/holding ("one program, several corporate clients", see D-009) a modeled entity, or is it represented only by the HR-user ↔ client links?
 - [ ] Which entity is the "center of gravity" the rest hang off?
 - [ ] Which entities have a formal state machine vs a simple active/archived flag?
 - [ ] Can entities be deleted, or only archived?

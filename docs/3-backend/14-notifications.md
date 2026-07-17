@@ -20,7 +20,7 @@ _(empty — one row per notification; `N-` IDs, referenced from transitions, job
 _(empty — can users mute or configure notifications?)_
 
 ## Open decisions
-- [ ] Which channels does v1 support?
+- [x] Which channels does v1 support? → Email only (D-014)
 - [ ] Which events must notify someone?
 - [ ] Can users opt out of any notifications?
 - [ ] Are notifications sent immediately or batched/digested?
