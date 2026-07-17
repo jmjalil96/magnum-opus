@@ -17,7 +17,7 @@ status: drafted
 
 ### Portal users (external)
 
-- **HR User** — works at a corporate client; submits claims on behalf of that client's employees and tracks them. Sees full claim detail, including medical information (D-004). One HR user can span several corporate clients — corporate groups/holdings run multiple clients as one program (D-009).
+- **HR User** — works at a corporate client; submits claims on behalf of that client's employees and tracks them. Sees full claim detail, including medical information (D-004). One HR user can span several corporate clients — corporate groups/holdings run multiple clients as one program (D-009) — and one client can have several HR users (D-032): the relationship is fully many-to-many.
 - **Agent** — external sales agent/producer, outside the brokerage, who brought in corporate clients and holds a book of them. Agents and clients relate many-to-many with no limit on either side (D-010). Sees full claim detail for the clients in their book (D-002, D-005).
 - **Employee** — an insured employee of a corporate client; submits and tracks their own claims and those of their dependents (D-006).
 
@@ -44,10 +44,10 @@ One system role per persona, 7 in total:
 1:1 — each persona above maps to exactly one role. **One role per user in v1**: a user account holds a single role; multi-role support (e.g. an HR user who is also an insured employee) is deferred (D-008).
 
 ## Open decisions
-- [x] Can one HR user span multiple corporate clients? → Yes (D-009). Several HR users per client assumed allowed too — flag if wrong.
+- [x] Can one HR user span multiple corporate clients? → Yes (D-009); and one client can have several HR users (D-032) — fully many-to-many.
 - [x] Does a corporate client have exactly one agent, or can several agents share a client? → Many-to-many, no restriction (D-010)
 - [x] Does anyone from the insurer ever log in, or is the insurer purely external to the app? → Purely external; catalog entry only (D-011)
 - [x] How many distinct personas are there? → 8 (7 user personas + dependent as non-user), see D-001, D-002
 - [x] What roles does the system need? Do personas map 1:1 to roles? → 7 roles, 1:1
 - [x] Can one user hold multiple roles? → No, one role per user in v1 (D-008)
-- [ ] Are there external users (outside the owning organization) with access? → Yes: `hr`, `agent`, `employee`; scoping rules to be locked in the permissions matrix
+- [x] Are there external users (outside the owning organization) with access? → Yes: `hr`, `agent`, `employee`; scoping rules to be locked in the permissions matrix

@@ -51,6 +51,11 @@ Required by T-006 and T-007 (D-023, D-026, D-028); a free-text note may accompan
 
 `duplicate` appears in both lists deliberately, disambiguated by state (D-029): a duplicate discovered in `draft`/`review` **must** exit via T-007 (D-020); one discovered after sending exits via T-006, since T-007 is unavailable from those states (D-025). The claim's state determines the path — there is never a choice between the two.
 
+### Loop and cancellation semantics
+
+- The T-003/T-004 (`sent_to_insurer` ⇄ `pending_information`) loop is **unlimited** (D-030): no counter, no cap; time-in-state exposes stuck claims.
+- Cancelling a `settled` claim (T-006, admin-only per D-021) **erases nothing** (D-031): settlement outcome and amounts stay recorded, history and audit remain intact, the required reason says why. Counts and dashboards always follow the claim's current state — a cancelled-settled claim counts as `cancelled`, never `settled`.
+
 ### Diagram
 
 ```mermaid
@@ -73,9 +78,9 @@ stateDiagram-v2
 
 ## Open decisions
 - [ ] What exactly makes "initial claim data complete" for T-002? (becomes a `BR-` rule; depends on the claim's field list in the domain model)
-- [ ] Is there any limit on the T-003/T-004 loop count, or unlimited?
+- [x] Is there any limit on the T-003/T-004 loop count, or unlimited? → Unlimited (D-030)
 - [x] Define the reason category lists for cancellation and not-processed → see Reason categories (D-028)
-- [ ] Cancelling a `settled` claim rewrites history — what happens downstream (dashboard counts, recorded amounts, audit)?
+- [x] Cancelling a `settled` claim rewrites history — what happens downstream? → Data stays, counts follow current state, no reversal logic (D-031)
 - [x] T-007 sources → restricted to `draft`/`review`; semantics win over the original "all non-terminal" statement (D-025)
 - [x] Who triggers T-007? → `claims-analyst`, `admin` (D-025)
 - [x] Cancellation / not-processed reasons → mandatory category + optional free-text note (D-026)

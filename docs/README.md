@@ -19,11 +19,11 @@ The suite is a graph, not a pile of prose: every artifact has a stable ID, every
 | 00 | [Spec Conventions](00-conventions.md) | ID scheme, reference rule, status gates | drafted |
 | — | [Decision Log](decision-log.md) | Resolved decisions (`D-`) and their rationale | drafted |
 | 01 | [PRD / Vision](1-product/01-prd.md) | Problem, goals, scope, non-goals | skeleton |
-| 02 | [Personas & Roles](1-product/02-personas-and-roles.md) | Who uses the app and the role list | skeleton |
+| 02 | [Personas & Roles](1-product/02-personas-and-roles.md) | Who uses the app and the role list | drafted |
 | 03 | [Glossary](1-product/03-glossary.md) | One canonical name per concept | skeleton |
 | 04 | [Features & Journeys](1-product/04-features-and-journeys.md) | Feature catalog (`F-`) and end-to-end journeys (`J-`) | skeleton |
 | 05 | [Domain Model](2-domain/05-domain-model.md) | Entities, relationships, lifecycles | skeleton |
-| 06 | [State Machines & Transitions](2-domain/06-state-machines-and-transitions.md) | States and transitions (`T-`) with referenced triggers/effects | skeleton |
+| 06 | [State Machines & Transitions](2-domain/06-state-machines-and-transitions.md) | States and transitions (`T-`) with referenced triggers/effects | drafted |
 | 07 | [Business Rules](2-domain/07-business-rules.md) | Calculations, validations, deadlines, limits (`BR-`) | skeleton |
 | 08 | [Permissions Matrix](2-domain/08-permissions-matrix.md) | Enforceable role × action grid (`PERM-`) | skeleton |
 | 09 | [Database Schema](3-backend/09-database-schema.md) | Tables, columns, constraints, indexes, seeds | skeleton |
@@ -53,4 +53,7 @@ The suite is a graph, not a pile of prose: every artifact has a stable ID, every
 
 - `SUPER_PROMPT.md` — authority rules, output expectations, and the "unspecified behavior is a blocking decision, never invented" contract.
 - `manifest.yaml` — canonical doc order, dependencies, inclusion priority for prompt assembly.
-- Validator script — link/ID checks, placeholder detection, generated traceability matrix, generated index.
+- Full validator — generated traceability matrix and generated index. (A **minimal
+  checker exists now**: `scripts/check-docs.py` — frontmatter, local links, comment
+  balance, placeholder leaks, README status drift, D-/T- reference resolution. Run
+  it before committing doc changes.)

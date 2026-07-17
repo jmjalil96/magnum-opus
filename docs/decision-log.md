@@ -41,6 +41,9 @@ Decision statuses: `open` → `decided` → `superseded` (by a later `D-` entry,
 | D-027 | `drafted` gate allows TBD cross-doc reference cells, not same-doc unknowns | decided | 2026-07-16 | 00-conventions |
 | D-028 | v1 reason category lists for T-006 and T-007 defined | decided | 2026-07-16 | 06-state-machines |
 | D-029 | `duplicate` disambiguated by state: draft/review → T-007, later → T-006 | decided | 2026-07-16 | 06-state-machines |
+| D-030 | T-003/T-004 information loop is unlimited | decided | 2026-07-17 | 06-state-machines |
+| D-031 | Cancelling a settled claim: data stays, counts follow current state | decided | 2026-07-17 | 06-state-machines |
+| D-032 | A corporate client can have several HR users (HR ↔ client fully many-to-many) | decided | 2026-07-17 | 02-personas |
 
 ## Entries
 
@@ -333,3 +336,33 @@ Decision statuses: `open` → `decided` → `superseded` (by a later `D-` entry,
 - **Rejected:** Removing `duplicate` from T-006 (late-found duplicates would be mislabeled `created_in_error`/`administrative`, losing the count).
 - **Consequences:** Dashboard counts stay meaningful: `not_processed`+`duplicate` = caught before sending; `cancelled`+`duplicate` = caught after. The rule is mechanically enforceable — no state offers both paths.
 - **Docs affected:** [06-state-machines-and-transitions.md](2-domain/06-state-machines-and-transitions.md)
+
+### D-030 — T-003/T-004 loop is unlimited
+
+- **Status:** decided
+- **Date:** 2026-07-17
+- **Context:** Doc 06 open decision: whether the `sent_to_insurer` ⇄ `pending_information` loop (T-003/T-004) has a round limit.
+- **Chosen:** Unlimited. The loop count is the insurer's behavior, not the app's; the aging display (time-in-state) already exposes claims stuck in the loop.
+- **Rejected:** A capped loop with escalation — requires inventing a cap and an escalation mechanism v1 doesn't need.
+- **Consequences:** No loop counter or guard in the state machine; dashboards surface long-running loops through time-in-state, nothing blocks.
+- **Docs affected:** [06-state-machines-and-transitions.md](2-domain/06-state-machines-and-transitions.md)
+
+### D-031 — Cancelling a settled claim: downstream story
+
+- **Status:** decided
+- **Date:** 2026-07-17
+- **Context:** D-016/D-021 allow admin-only cancellation of `settled` claims, which rewrites history; the open question was what happens to dashboard counts, recorded amounts, and audit.
+- **Chosen:** Nothing is erased. The settlement outcome and amounts stay recorded on the claim; the full transition history remains in the audit trail; the required cancellation reason (D-026, D-028) says why. Counts and dashboards always reflect the claim's **current state** — a cancelled-settled claim counts as `cancelled`, never as `settled`, with no double counting. No financial reversal logic exists in-app (amounts are record-only, D-013).
+- **Rejected:** Deleting/zeroing settlement data on cancellation; keeping the claim in settled counts with a cancellation flag.
+- **Consequences:** Dashboard queries group by current state only; the settled-then-cancelled trail is visible in claim history/audit; any future reporting that sums settled amounts must exclude `cancelled` claims by construction.
+- **Docs affected:** [06-state-machines-and-transitions.md](2-domain/06-state-machines-and-transitions.md)
+
+### D-032 — Several HR users per corporate client
+
+- **Status:** decided
+- **Date:** 2026-07-17
+- **Context:** D-009 established one HR user spanning many clients; the reverse direction was an explicitly flagged assumption in doc 02 ("several HR users per client assumed allowed — flag if wrong").
+- **Chosen:** Confirmed: a corporate client can have several HR users. Together with D-009, HR ↔ client is fully many-to-many, same shape as agents ↔ clients (D-010).
+- **Rejected:** Exactly one HR user per client.
+- **Consequences:** HR scoping and agent scoping share one relationship shape (user↔client link table); user management needs no per-client uniqueness rule for HR.
+- **Docs affected:** [02-personas-and-roles.md](1-product/02-personas-and-roles.md)
